@@ -1,10 +1,13 @@
  -- Build
 
 function Blueprint:Build()
-	local ps = self:GetPSByName("NAME HERE")
-  self.ps = ps:GetID()
-  self:UnlinkPSAndFromMO(ps)
-  
+	--You should have PS with same name linked to the blueprint.
+	local ps = self:GetPSByName("name of ps")
+	--Here we get ID of PS. Everthing such as Moveable Object, Particle System, Light or Controller has unique ID.
+	self.ps = ps:GetID()
+	--Using function, we unlink it from mo and assembly.
+	self:UnlinkPSAndFromMO(ps)
+	
 end
 
 
@@ -12,14 +15,17 @@ end
 
 
 
--- Update
+ -- Update
 
 function Blueprint:Update()
-  
-  	local ps = scene:GetPSByID(self.ps)
-		if ps then
-			ps:EmitBoom()
-      --ps:SetParticleEmitting(true)
-		end
-  
+	--Using saved ID, we find PS that we unlinked.
+	local ps = scene:GetPSByID(self.ps)
+	--If PS exists...
+	if ps then
+		--We EMITT BOOM.
+		ps:EmitBoom()
+		--Or turn emitting on.
+		--ps:SetParticleEmitting(true)
+		--Or just do whatever PS can do.
+	end
 end
